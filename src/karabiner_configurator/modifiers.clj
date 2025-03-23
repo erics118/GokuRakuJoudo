@@ -26,7 +26,7 @@
    (mapv
     (fn [modifier-key]
       (massert (d/modifier-k? modifier-key)
-               (str "invliad modifer key: " modifier-key " in " modifier-name))
+               (str "invalid modifier key: " modifier-key " in " modifier-name))
       (name modifier-key))
     modifier-info)})
 
@@ -51,7 +51,7 @@
   {:mandatory [(name modifier-info)]})
 
 (defn parse-single-modifier-definition
-  "parse a modifer definition into a map with mandatory and optional
+  "parse a modifier definition into a map with mandatory and optional
   used both in here and parsing froms, tos as well"
   [modifier-info & modifier-name]
   (let [modifier-name (first modifier-name)
@@ -76,7 +76,7 @@
        (parse-single-modifier-definition modifier-info modifier-name)}))))
 
 (defn parse-modifiers
-  "parse modifires to string"
+  "parse modifiers to string"
   [modifiers]
   (when (some? modifiers)
     (d/update-conf-data (generate modifiers))))
