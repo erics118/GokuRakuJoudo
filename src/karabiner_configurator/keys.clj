@@ -31,8 +31,8 @@
   [mkey]
   (into {} (map update-mouse-map mkey)))
 
-(def special-modi-re #"(^![!ACSTOQWERFP]+#[#CSTOQWERFP]+)")
-(def special-modi-mandatory-re #"(^![!ACSTOQWERFP]+)")
+(def special-modi-re #"(^![!CSTOQWERFP]+#[#CSTOQWERFP]+)")
+(def special-modi-mandatory-re #"(^![!CSTOQWERFP]+)")
 (def special-modi-optional-re #"(^#[#CSTOQWERFP]+)")
 (def special-modi-optional-both-re #"(#[#CSTOQWERFP]+)")
 
@@ -79,7 +79,8 @@
           result (cond
                    (includes? s "OO")
                    (conj result (name :option))
-                   (contains?? vec \O) (conj result (name :left_option))
+                   (contains?? vec \O)
+                   (conj result (name :left_option))
                    :else
                    result)
           result (cond
@@ -95,18 +96,14 @@
           result (if (contains?? vec \R) (conj result (name :right_shift)) result)
           result (if (contains?? vec \F) (conj result (name :fn)) result)
           result (if (contains?? vec \P) (conj result (name :caps_lock)) result)
-          result (if (contains?? vec \#) [(name :any)] result)
+          result (if (contains?? vec \#) (conj result (name :any)) result)
           result (cond
-                   (includes? s "!A")
-                   [(name :command)
-                    (name :control)
-                    (name :option)
-                    (name :shift)]
                    (contains?? vec \!)
-                   [(name :right_command)
-                    (name :right_control)
-                    (name :right_option)
-                    (name :right_shift)]
+                   (conj result
+                         (name :right_command)
+                         (name :right_control)
+                         (name :right_option)
+                         (name :right_shift))
                    :else
                    result)]
       result)
