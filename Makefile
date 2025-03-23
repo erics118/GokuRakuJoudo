@@ -1,4 +1,4 @@
-GRAALVM_ARG=--report-unsupported-elements-at-runtime --no-server --initialize-at-build-time
+GRAALVM_ARG=--initialize-at-build-time
 JAR_NAME=karabiner-configurator-0.1.0-standalone
 TARGET_JAR=target/$(JAR_NAME).jar
 all:
