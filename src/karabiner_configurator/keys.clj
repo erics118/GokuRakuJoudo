@@ -103,10 +103,10 @@
                     (name :option)
                     (name :shift)]
                    (contains?? vec \!)
-                   [(name :left_command)
-                    (name :left_control)
-                    (name :left_option)
-                    (name :left_shift)]
+                   [(name :right_command)
+                    (name :right_control)
+                    (name :right_option)
+                    (name :right_shift)]
                    :else
                    result)]
       result)
