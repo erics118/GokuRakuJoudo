@@ -32,8 +32,7 @@
                                                            [:!C#Pq ["command-q" 1] :safari {:delayed {:invoked ["command-q" 0] :canceled ["command-q" 0]}}]]}
    {:des "Mouse button"
     :rules [[{:pkey :button5} :mission_control]
-            [{:pkey :button4} [{:pkey :button1} {:pkey :button1} :!!grave_accent_and_tilde]]
-            [{:pkey :button4} [{:pkey :button1} {:pkey :button1} :!!Agrave_accent_and_tilde]]]}
+            [{:pkey :button4} [{:pkey :button1} {:pkey :button1} :!!grave_accent_and_tilde]]]}
    {:des "Change input source"
     :rules [[:i :us :q-mode]
             [:o :squirrel :q-mode]]}
@@ -360,19 +359,10 @@
                                      :to   [{:pointing_button "button1"}
                                             {:pointing_button "button1"}
                                             {:key_code  "grave_accent_and_tilde"
-                                             :modifiers ["left_command"
-                                                         "left_control"
-                                                         "left_option"
-                                                         "left_shift"]}]
-                                     :type "basic"}
-                                    {:from {:pointing_button "button4"}
-                                     :to   [{:pointing_button "button1"}
-                                            {:pointing_button "button1"}
-                                            {:key_code  "grave_accent_and_tilde"
-                                             :modifiers ["command"
-                                                         "control"
-                                                         "option"
-                                                         "shift"]}]
+                                             :modifiers ["right_command"
+                                                         "right_control"
+                                                         "right_option"
+                                                         "right_shift"]}]
                                      :type "basic"}]}
                     {:description  "Change input source"
                      :manipulators [{:from       {:key_code "i"}
