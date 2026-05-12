@@ -32,19 +32,15 @@
 (defn load-edn
   "Load edn from an io/reader source (filename or io/resource)."
   [source & args]
-  (with-open [r (io/reader source)]
-    (if args
-      (get-in (edn/read (java.io.PushbackReader. r)) args)
-      (edn/read (java.io.PushbackReader. r))))
-  #_(try
-      (with-open [r (io/reader source)]
-        (if args
-          (get-in (edn/read (java.io.PushbackReader. r)) args)
-          (edn/read (java.io.PushbackReader. r))))
-      (catch java.io.IOException e
-        (printf "Couldn't open '%s': %s\n" source (.getMessage e)))
-      (catch RuntimeException e
-        (printf "Error parsing edn file '%s': %s\n" source (.getMessage e)))))
+  (try
+    (with-open [r (io/reader source)]
+      (if args
+        (get-in (edn/read (java.io.PushbackReader. r)) args)
+        (edn/read (java.io.PushbackReader. r))))
+    (catch java.io.IOException e
+      (throw (ex-info (format "Couldn't open '%s': %s" source (.getMessage e)) {:source source})))
+    (catch RuntimeException e
+      (throw (ex-info (format "Error parsing edn file '%s': %s" source (.getMessage e)) {:source source})))))
 
 (defn load-result-edn
   [source]
@@ -53,23 +49,13 @@
 (defn load-json
   "Load json from an io/reader source (filename or io/resource)."
   [source]
-  (with-open [r (io/reader source)]
-    (json/parse-stream (java.io.PushbackReader. r) true))
-  #_(try
-      (with-open [r (io/reader source)]
-        (json/parse-stream (java.io.PushbackReader. r) true))
-      (catch java.io.IOException e
-        (printf "Couldn't open '%s': %s\n" source (.getMessage e)))
-      (catch RuntimeException e
-        (printf "Error parsing edn file '%s': %s\n" source (.getMessage e)))))
-
-;; (defmacro when-let*
-;;   "Multiple binding version of when-let"
-;;   [bindings & body]
-;;   (if (seq bindings)
-;;     `(when-let [~(first bindings) ~(second bindings)]
-;;        (when-let* ~(vec (drop 2 bindings)) ~@body))
-;;     `(do ~@body)))
+  (try
+    (with-open [r (io/reader source)]
+      (json/parse-stream (java.io.PushbackReader. r) true))
+    (catch java.io.IOException e
+      (throw (ex-info (format "Couldn't open '%s': %s" source (.getMessage e)) {:source source})))
+    (catch RuntimeException e
+      (throw (ex-info (format "Error parsing json file '%s': %s" source (.getMessage e)) {:source source})))))
 
 (defn dissoc-in
   "Dissociates an entry from a nested associative structure returning a new

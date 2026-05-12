@@ -32,8 +32,8 @@
 ;;                        "y": 1536,                   move down
 ;;   :hwheel              "horizontal_wheel": 32,      scroll left
 ;;                        "horizontal_wheel": -32,     scroll right
-;;   :vwheel              "vertial_wheel": -32,        scroll up
-;;                        "vertial_wheel": 32,         scroll down
+;;   :vwheel              "vertical_wheel": -32,        scroll up
+;;                        "vertical_wheel": 32,         scroll down
 ;;                        "x": -3072,                  fast move left
 ;;                        "x": 3072,                   fast move right
 ;;                        "y": -3072,                  fast move up

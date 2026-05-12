@@ -11,7 +11,7 @@
 
 (defn parse-keycode [keycode & [from-to]]
   (if from-to
-    (massert (d/to-k? keycode) (str "invalid key code " keycode " can't be used in from"))
+    (massert (d/to-k? keycode) (str "invalid key code " keycode " can't be used in to"))
     (massert (d/from-k? keycode) (str "invalid key code " keycode " can't be used in from")))
   keycode)
 
@@ -35,27 +35,6 @@
 (def special-modi-mandatory-re #"(^![!CSTOQWERFP]+)")
 (def special-modi-optional-re #"(^#[#CSTOQWERFP]+)")
 (def special-modi-optional-both-re #"(#[#CSTOQWERFP]+)")
-
-;; (defn special-modi-realkey [smodi]
-;;   (let [keystr (name smodi)
-;;         both (re-find special-modi-re keystr)
-;;         mandatory (if both
-;;                     (re-find special-modi-mandatory-re (first both))
-;;                     (re-find special-modi-mandatory-re keystr))
-;;         optional (if both
-;;                    (re-find special-modi-optional-both-re (first both))
-;;                    (re-find special-modi-optional-re keystr))
-;;         validate (massert (or both mandatory optional)
-;;                           (str "invalid special modifier keyword " smodi))
-;;         mandatory (if mandatory (first mandatory) nil)
-;;         optional (if optional (first optional) nil)
-;;         realkey (cond both
-;;                       (keyword (subs keystr (count (first both))))
-;;                       (and mandatory (not both))
-;;                       (keyword (subs keystr (count mandatory)))
-;;                       (and optional (not both))
-;;                       (keyword (subs keystr (count optional))))]
-;;     realkey))
 
 (defn special-modi-vector-to-modifiers
   [vec]

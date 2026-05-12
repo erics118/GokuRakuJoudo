@@ -40,12 +40,8 @@
                      :simlayers {}
                      :simlayer-threshold 250}))
 
-;; (defn applications? [k] (some? (k (:applications @conf-data))))
 (defn devices? [k] (some? (k (:devices @conf-data))))
 (defn input-sources? [k] (some? (k (:input-sources @conf-data))))
-;; (defn modifiers? [k] (some? (k (:modifiers @conf-data))))
-;; (defn froms? [k] (some? (k (:froms @conf-data))))
-;; (defn layers? [k] (some? (k (:layers @conf-data))))
 (defn simlayers? [k] (some? (k (:simlayers @conf-data))))
 (defn templates? [k-or-vec]
   (cond (keyword? k-or-vec)
@@ -99,11 +95,6 @@
 (defn profile? [k]
   (and (keyword? k) (k (:profiles @conf-data))))
 
-;; (def default-profile {:Default {:sim 50 ;; basic.simultaneous_threshold_milliseconds
-;;                                 :delay 500 ;; basic.to_delayed_action_delay_milliseconds
-;;                                 :alone 1000 ;; basic.to_if_alone_timeout_milliseconds
-;;                                 :held 500 ;; basic.to_if_held_down_threshold_milliseconds
-;;                                 :default true}})
 
 (defn update-user-default-profile-name [profile-name]
   (massert
@@ -127,33 +118,27 @@
 
 (defn k?
   [k]
-  (when (keyword? k)
-    (some? (k keys-info))))
+  (boolean (and (keyword? k) (some? (k keys-info)))))
 
 (defn modifier-k?
   [k]
-  (k? k)
-  (true? (:modifier (k keys-info))))
+  (boolean (and (k? k) (true? (:modifier (k keys-info))))))
 
 (defn from-k?
   [k]
-  (k? k)
-  (nil? (:not-from (k keys-info))))
+  (boolean (and (k? k) (nil? (:not-from (k keys-info))))))
 
 (defn to-k?
   [k]
-  (k? k)
-  (nil? (:not-to (k keys-info))))
+  (boolean (and (k? k) (nil? (:not-to (k keys-info))))))
 
 (defn consumer-k?
   [k]
-  (k? k)
-  (true? (:consumer-key (k keys-info))))
+  (boolean (and (k? k) (true? (:consumer-key (k keys-info))))))
 
 (defn pointing-k?
   [k]
-  (k? k)
-  (true? (:button (k keys-info))))
+  (boolean (and (k? k) (true? (:button (k keys-info))))))
 
 (def mkey-keyword {:x {:name :x}
                    :y {:name :y}
@@ -174,20 +159,6 @@
   (when (keyword? k)
     (contains?? [\! \#] (first (name k)))))
 
-;; (defn find-condition-keyword
-;;   [kw]
-;;   (cond (contains? @conf-data :applications)
-;;         {:name :application
-;;          :value (kw (:applications @conf-data))}
-;;         (contains? @conf-data :devices)
-;;         {:name :devices
-;;          :value (kw (:devices @conf-data))}
-;;         (contains? @conf-data :input-sources)
-;;         {:name :input-sources
-;;          :value (kw (:input-sources @conf-data))}
-;;         (contains? @conf-data :simlayers)
-;;         {:name :simlayers
-;;          :value (kw (:simlayers @conf-data))}))
 
 (defn update-conf-data
   [data]
@@ -201,4 +172,3 @@
   [keys-vector data]
   (swap! conf-data assoc-in keys-vector data))
 
-;; (def output "output data that will convert into json string" [])
