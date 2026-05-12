@@ -7,7 +7,7 @@ jobs:
     name: Build
     strategy:
       matrix:
-        os: [macos-latest, macos-13]
+        os: [macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup GraalVM environment
@@ -16,7 +16,7 @@ jobs:
           java-version: "21"
           distribution: "graalvm"
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v5
         id: maven-cache # use this to check for `cache-hit` (`steps.yarn-and-maven-cache.outputs.cache-hit != 'true'`)
         with:
           path: ~/.m2/
@@ -24,14 +24,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Setup Clojure
-        uses: DeLaGuardo/setup-clojure@13.0
+        uses: DeLaGuardo/setup-clojure@13.6.0
         with:
           lein: latest
       - name: Install joker
         run: |
           brew install candid82/brew/joker
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install dependencies
         run: lein deps
       - name: Compile
@@ -72,7 +72,7 @@ jobs:
         with:
           name: goku-aarch64-apple-darwin.zip
       - name: Delete Other Draft Releases
-        uses: hugo19941994/delete-draft-releases@v1.0.0
+        uses: hugo19941994/delete-draft-releases@v3.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
