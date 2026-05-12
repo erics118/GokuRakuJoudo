@@ -5,7 +5,10 @@ on: push
 jobs:
   build:
     name: Build
-    runs-on: [macos-latest, ubuntu-latest]
+    strategy:
+      matrix:
+        os: [macos-latest, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Setup GraalVM environment
         uses: graalvm/setup-graalvm@v1
@@ -64,7 +67,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v5
         with:
-          name: goku-x86_64-applle-darwin.zip
+          name: goku-x86_64-apple-darwin.zip
       - uses: actions/download-artifact@v5
         with:
           name: goku-aarch64-apple-darwin.zip
@@ -75,11 +78,11 @@ jobs:
 
       - name: Get sha256 arm
         id: sha256-arm
-        run: echo "::set-output name=checksum::$(shasum -a 256 goku-aarch64-apple-darwin.zip)"
+        run: echo "checksum=$(shasum -a 256 goku-aarch64-apple-darwin.zip)" >> $GITHUB_OUTPUT
 
       - name: Get sha256 intel
         id: sha256-intel
-        run: echo "::set-output name=checksum::$(shasum -a 256 goku-x86_64-applle-darwin.zip)"
+        run: echo "checksum=$(shasum -a 256 goku-x86_64-apple-darwin.zip)" >> $GITHUB_OUTPUT
 
       - name: Draft release
         id: draft-release
@@ -93,10 +96,10 @@ jobs:
           prerelease: false
           files: |
             goku-aarch64-apple-darwin.zip
-            goku-x86_64-applle-darwin.zip
+            goku-x86_64-apple-darwin.zip
           body: |
             - goku-aarch64-apple-darwin.zip sha256 `${{ steps.sha256-arm.outputs.checksum }}`
-            - goku-x86_64-applle-darwin.zip sha256 `${{ steps.sha256-intel.outputs.checksum }}`
+            - goku-x86_64-apple-darwin.zip sha256 `${{ steps.sha256-intel.outputs.checksum }}`
 
   release:
     name: Release
@@ -106,17 +109,17 @@ jobs:
     steps:
       - uses: actions/download-artifact@v5
         with:
-          name: goku-x86_64-applle-darwin.zip
+          name: goku-x86_64-apple-darwin.zip
       - uses: actions/download-artifact@v5
         with:
           name: goku-aarch64-apple-darwin.zip
       - name: Get sha256 arm
         id: sha256-arm
-        run: echo "::set-output name=checksum::$(shasum -a 256 goku-aarch64-apple-darwin.zip)"
+        run: echo "checksum=$(shasum -a 256 goku-aarch64-apple-darwin.zip)" >> $GITHUB_OUTPUT
 
       - name: Get sha256 intel
         id: sha256-intel
-        run: echo "::set-output name=checksum::$(shasum -a 256 goku-x86_64-applle-darwin.zip)"
+        run: echo "checksum=$(shasum -a 256 goku-x86_64-apple-darwin.zip)" >> $GITHUB_OUTPUT
       - name: Create Release
         id: create-release
         uses: softprops/action-gh-release@v2
@@ -128,9 +131,9 @@ jobs:
           body: |
             Checkout the changelog at https://github.com/yqrashawn/GokuRakuJoudo/blob/master/CHANGELOG.org
             - goku-aarch64-apple-darwin.zip sha256 `${{ steps.sha256-arm.outputs.checksum }}`
-            - goku-x86_64-applle-darwin.zip sha256 `${{ steps.sha256-intel.outputs.checksum }}`
+            - goku-x86_64-apple-darwin.zip sha256 `${{ steps.sha256-intel.outputs.checksum }}`
           draft: false
           prerelease: false
           files: |
             goku-aarch64-apple-darwin.zip
-            goku-x86_64-applle-darwin.zip
+            goku-x86_64-apple-darwin.zip
