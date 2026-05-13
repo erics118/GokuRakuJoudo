@@ -7,7 +7,7 @@ jobs:
     name: Build
     strategy:
       matrix:
-        os: [macos-latest, macos-13]
+        os: [macos-latest, macos-26-intel]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup GraalVM environment
