@@ -62,7 +62,7 @@ significantly as you can create new rules as little as few characters.
 
 ## Install
 
-    brew install yqrashawn/goku/goku
+    brew install erics118/tap/goku
 
 
 <a id="usage"></a>
