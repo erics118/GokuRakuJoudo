@@ -54,7 +54,7 @@ jobs:
           fi
       - name: Pack
         run: zip -r ${{ steps.set-name.outputs.artifact_name }} goku gokuw
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.set-name.outputs.artifact_name }}
           path: ${{ steps.set-name.outputs.artifact_name }}
