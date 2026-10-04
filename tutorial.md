@@ -131,7 +131,7 @@ The only condition that Goku does not support is [keyboard type](https://karabin
     ;; E  | right_option
     ;; R  | right_shift
     ;; P  | caps_lock
-    ;; !! | mandatory command + control + optional + shift (hyper)
+    ;; !! | mandatory right_command + right_control + right_option + right_shift (hyper)
     ;; ## | optional any
 
     ;; examples
@@ -227,7 +227,7 @@ Don't define conditions with the name of keycode. If you define an application c
 
 ### variable condition
 
-Karabiner's variable condition functionality make it posible to define keyboard layers. You can use this functionality to use most keys as modifier keys. Goku makes it really easy to use variable conditions.
+Karabiner's variable condition functionality makes it possible to define keyboard layers. You can use this functionality to use most keys as modifier keys. Goku makes it really easy to use variable conditions.
 
 ```clojure
     {:main [{:des "tap w to set w-layer to 1"
@@ -318,7 +318,7 @@ In karabiner, there's two kinds of layers implementation. I'll just call them th
 
     Basically, if you type fast, use simlayer, otherwise, use the old layer. If you don't care about this, you can just jump to the next header, which is how to set this in Goku.
 
-    The old layer has the same definition as "layers" in thoes keyboard firmware keymap editors. eg.
+    The old layer has the same definition as "layers" in those keyboard firmware keymap editors. eg.
 
 ```
         press w key down --> in w layer ("w layer" set to 1)

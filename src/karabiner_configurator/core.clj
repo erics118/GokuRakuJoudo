@@ -177,7 +177,7 @@
                  (and (fs/exists? path)
                       (fs/file? path)
                       (fs/readable? path)))
-               "Make sure the file is exits and readable"]]
+               "Make sure the file exists and is readable"]]
    ["-d" "--dry-run"]
    ["-A" "--dry-run-all"]])
 

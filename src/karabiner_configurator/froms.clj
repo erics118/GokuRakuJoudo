@@ -75,7 +75,7 @@
 ;; :afterup               to event definition
 
 (def simo-keywords
-  "keyword while parsing froms, fisrt in vactor is the default value"
+  "keyword while parsing froms, first in vector is the default value"
   {:interrupt {:values      [false true]
                :json-values [false true]
                :name        :detect_key_down_uninterruptedly}

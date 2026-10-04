@@ -17,7 +17,7 @@
                       :language "en"}}
 
  :templates {:launch "osascript -e 'tell application \"Alfred 3\" to run trigger \"launch%s\" in workflow \"yqrashawn.workflow.launcher\" with argument \"\"'"}
- ;; define alias for modifers
+ ;; define alias for modifiers
  :modifiers {:11 [:left_command :left_control]
              :111 [:left_command :left_control :left_option]
              :1111 [:left_command :left_control :left_option :left_shift]
@@ -46,7 +46,7 @@
 
  ;; define tos
  ;; use in <to>
- :tos {:macos-defin {:key :d :modifiers [:left_command :left_control]}
+ :tos {:macos-define {:key :d :modifiers [:left_command :left_control]}
        :alf--search-help "osascript -e 'tell application \"Alfred 3\" to run trigger \"helpSearch\" in workflow \"com.tedwise.menubarsearch\" with argument \"\"'"}
 
  ;;;; helper function to generate things little bit quicker

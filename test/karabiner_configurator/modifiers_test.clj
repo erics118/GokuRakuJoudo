@@ -3,10 +3,10 @@
             [karabiner-configurator.data :refer [init-conf-data]]
             [karabiner-configurator.modifiers :as sut]))
 
-(def example-modifers {:modifiers {:111 [:left_command :left_control]
-                                   :222 {:mandatory [:left_command :left_shift]}
-                                   :3 {:mandatory :left_command}
-                                   :444 {:optional :any}}})
+(def example-modifiers {:modifiers {:111 [:left_command :left_control]
+                                    :222 {:mandatory [:left_command :left_shift]}
+                                    :3 {:mandatory :left_command}
+                                    :444 {:optional :any}}})
 
 (def result {:applications {},
              :tos {},
@@ -26,4 +26,4 @@
 (deftest convert-modifiers
   (init-conf-data)
   (testing "FIXME, convert-modifiers fail."
-    (is (= (sut/generate (:modifiers example-modifers)) result))))
+    (is (= (sut/generate (:modifiers example-modifiers)) result))))

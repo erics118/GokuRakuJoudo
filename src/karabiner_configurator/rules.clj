@@ -436,9 +436,9 @@
              :when (some? rule)]
          (let [[from to condition other-options profiles] rule
                profiles (if (some? profiles) profiles [@d/user-default-profile-name])
-               ;; a rule must have a from event defination and to event defination
-               ;; from event defination is defined in <from> section
-               ;; to event defination can be defined in <to> section or <other-options> section (as :alone :delayed :afterup)
+               ;; a rule must have a from event definition and to event definition
+               ;; from event definition is defined in <from> section
+               ;; to event definition can be defined in <to> section or <other-options> section (as :alone :delayed :afterup)
                _validate-rule (massert
                                (and (some? from)
                                     (or

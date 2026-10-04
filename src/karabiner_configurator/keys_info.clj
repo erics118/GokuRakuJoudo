@@ -243,7 +243,7 @@
    :vk_consumer_illumination_down {:label "vk_consumer_illumination_down (equal to illumination_decrement)" :not-from true}
    :vk_consumer_illumination_up {:label "vk_consumer_illumination_up (equal to illumination_increment)" :not-from true}
    :vk_consumer_previous {:label "vk_consumer_previous (equal to rewind)" :not-from true}
-   :vk_consumer_play {:label "vk_consumer_play (equal to play)" :not-from true}
+   :vk_consumer_play {:label "vk_consumer_play (equal to play_or_pause)" :not-from true}
    :vk_consumer_next {:label "vk_consumer_next (equal to fast_forward)" :not-from true}
    :al_voicemail {:not-to true :consumer-key true}
    :al_desktop {:not-to true :consumer-key true}
@@ -322,4 +322,4 @@
    :al_integrated_help_center {:not-to true :consumer-key true}
    :al_word_processor {:consumer-key true}
    :volume_down {:label "volume_down (equal to volume_decrement)"}
-   :volume_up {:label "volume_up (equal to volume_increment`)"}})
+   :volume_up {:label "volume_up (equal to volume_increment)"}})
